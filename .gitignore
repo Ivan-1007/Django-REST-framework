@@ -34,3 +34,4 @@ make.bat
 Makefile
 
 doc-dev
+/src/proj/localsettings.py

@@ -1,7 +1,9 @@
 from django.db import models as db_models
 # from rest_framework.response import Response
 # from rest_framework.views import APIView
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
+from rest_framework import permissions
 
 from . import models, service
 from .serializers import (MovieListSerializer,
@@ -46,6 +48,9 @@ from .serializers import (MovieListSerializer,
 class MovieListView(ListAPIView):
     """Вывод списка фильмов"""
     serializer_class = MovieListSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = service.MovieFilter
+    permission_classes = [permissions.IsAuthenticated, ]
 
     def get_queryset(self):
         movies = models.Movie.objects.filter(draft=False).annotate(

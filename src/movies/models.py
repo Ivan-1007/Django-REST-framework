@@ -71,7 +71,7 @@ class Movie(models.Model):
         "Сборы в мире", default=0, help_text="указывать сумму в долларах"
     )
     category = models.ForeignKey(
-        Category, verbose_name="Категория", on_delete=models.SET_NULL, null=True
+        Category, verbose_name="Категория", on_delete=models.SET_NULL, null=True, related_name='movies'
     )
     url = models.SlugField(max_length=130, unique=True)
     draft = models.BooleanField("Черновик", default=False)
